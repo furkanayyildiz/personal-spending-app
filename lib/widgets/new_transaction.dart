@@ -19,13 +19,14 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredName = _nameController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredName.isEmpty || enteredAmount <= 0) {
+    if (enteredName.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
     widget.addTx(
       enteredName,
       enteredAmount,
+      _selectedDate,
     );
     Navigator.of(context).pop();
   }
