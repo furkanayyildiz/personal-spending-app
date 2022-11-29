@@ -35,23 +35,43 @@ class _NewTransactionState extends State<NewTransaction> {
       elevation: 5,
       child: Container(
         padding: EdgeInsets.all(10),
-        child: Column(children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: "Name"),
-            controller: nameController,
-            onChanged: (_) => submitData,
-          ),
-          TextField(
-            decoration: InputDecoration(labelText: "Amount"),
-            controller: amountController,
-            keyboardType: TextInputType.number,
-            onChanged: (_) => submitData,
-          ),
-          ElevatedButton(
-            onPressed: (submitData),
-            child: Text("Add Transaction"),
-          )
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(labelText: "Name"),
+              controller: nameController,
+              onChanged: (_) => submitData,
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: "Amount"),
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              onChanged: (_) => submitData,
+            ),
+            Container(
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("No Date Selected"),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(30, 0, 30, 0)),
+                      child: Text(
+                        "Select Date",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                )),
+            ElevatedButton(
+              onPressed: (submitData),
+              child: Text("Add Transaction"),
+            )
+          ],
+        ),
       ),
     );
   }
