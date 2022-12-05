@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_spending_app/widgets/chart.dart';
+import 'package:intl/intl.dart';
 
 //pages
 import './widgets/new_transaction.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
             )),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: TextStyle(
+                headline5: TextStyle(
                   fontFamily: "Opensans",
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -62,18 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // )
   ];
 
-  void _addNewTransaction(String name, double amount, DateTime chosenDate) {
-    final newTx = Transaction(
-        id: DateTime.now.toString(),
-        name: name,
-        amount: amount,
-        date: chosenDate);
-
-    setState(() {
-      _userTransactions.add(newTx);
-    });
-  }
-
   List<Transaction> get _recentTransaction {
     return _userTransactions.where((element) {
       return element.date.isAfter(
@@ -84,12 +73,27 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _startNewTransaction(BuildContext ctx) {
+  void _addNewTransaction(String name, double amount, DateTime chosenDate) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+
+    final newTx = Transaction(
+        id: formattedDate, name: name, amount: amount, date: chosenDate);
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return NewTransaction(_addNewTransaction);
-        //? klavyedeki tik e basında save yapma burada olabilir
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
       },
     );
   }
@@ -98,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _userTransactions.removeWhere((tx) => tx.id == id);
     });
+    print("##########03 ${_userTransactions.length}");
   }
 
   @override
@@ -107,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Personal Spending'),
         actions: <Widget>[
           IconButton(
-              onPressed: () => _startNewTransaction(context),
+              onPressed: () => _startAddNewTransaction(context),
               icon: Icon(Icons.add))
         ],
       ),
@@ -123,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _startNewTransaction(context),
+        onPressed: () => _startAddNewTransaction(context),
         child: Icon(Icons.add),
       ),
     );

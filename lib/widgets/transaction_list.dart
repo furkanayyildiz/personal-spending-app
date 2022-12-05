@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-//pages
-import 'package:personal_spending_app/models/transaction.dart';
+import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -15,29 +12,27 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
+      height: 450,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
-                  "Transaction is not added yet ...",
+                  'No transactions added yet!',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 SizedBox(
-                  //* it gives a space between widgets
                   height: 20,
                 ),
                 Container(
-                  height: 200,
-                  child: Image.asset(
-                    "assets/images/waiting.png",
-                    fit: BoxFit.cover,
-                  ),
-                )
+                    height: 200,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    )),
               ],
             )
           : ListView.builder(
-              itemBuilder: ((context, index) {
+              itemBuilder: (ctx, index) {
                 return Card(
                   elevation: 5,
                   margin: EdgeInsets.symmetric(
@@ -46,13 +41,14 @@ class TransactionList extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                        radius: 30,
-                        child: Padding(
-                          padding: EdgeInsets.all(6),
-                          child: FittedBox(
-                            child: Text("\$${transactions[index].amount}"),
-                          ),
-                        )),
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text('\$${transactions[index].amount}'),
+                        ),
+                      ),
+                    ),
                     title: Text(
                       transactions[index].name,
                       style: Theme.of(context).textTheme.headline6,
@@ -67,7 +63,7 @@ class TransactionList extends StatelessWidget {
                     ),
                   ),
                 );
-              }),
+              },
               itemCount: transactions.length,
             ),
     );
