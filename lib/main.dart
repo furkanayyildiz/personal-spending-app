@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return _userTransactions.where((element) {
       return element.date.isAfter(
         DateTime.now().subtract(
-          Duration(days: 7),
+          const Duration(days: 7),
         ),
       );
     }).toList();
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ? Container()
                 : FloatingActionButton(
                     onPressed: () => _startAddNewTransaction(context),
-                    child: Icon(Icons.add),
+                    child: const Icon(Icons.add),
                   ),
           );
   }

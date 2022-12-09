@@ -7,7 +7,7 @@ import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
-  Chart(this.recentTransaction);
+  const Chart(this.recentTransaction);
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -48,7 +48,7 @@ class Chart extends StatelessWidget {
         elevation: 8,
         margin: EdgeInsets.all(20),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: groupedTransactionValues.map((data) {

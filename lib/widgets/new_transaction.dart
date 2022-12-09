@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class NewTransaction extends StatefulWidget {
   final Function addTx;
 
-  NewTransaction(this.addTx);
+  const NewTransaction(this.addTx);
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();
@@ -91,8 +91,8 @@ class _NewTransactionState extends State<NewTransaction> {
                       ElevatedButton(
                         onPressed: _presentDatePicker,
                         style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.fromLTRB(30, 0, 30, 0)),
-                        child: Text(
+                            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0)),
+                        child: const Text(
                           "Select Date",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
